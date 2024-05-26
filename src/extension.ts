@@ -6,6 +6,8 @@ import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
 import { LangConfig, Options } from "./types";
 import { SortwindConfig } from "./constants/sortwind";
+import { LANGUAGE_CONFIG } from "./constants/language";
+import { RustywindArgs } from "./constants/rustywind";
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =
@@ -41,7 +43,7 @@ export function activate(context: ExtensionContext) {
 			const editorLangId = editor.document.languageId;
 
 			const matchers = buildMatchers(
-				langConfig[editorLangId] || langConfig['html']
+				langConfig[editorLangId] || langConfig[LANGUAGE_CONFIG.HTML]
 			);
 
 			for (const matcher of matchers) {
@@ -84,8 +86,8 @@ export function activate(context: ExtensionContext) {
 
 				const rustyWindArgs = [
 					workspaceFolder[0].uri.fsPath,
-					'--write',
-					shouldRemoveDuplicates ? '' : '--allow-duplicates',
+					RustywindArgs.WRITE,
+					shouldRemoveDuplicates ? '' : RustywindArgs.ALLOW_DUPLICATES,
 				].filter((argument) => argument !== '');
 
 				const rustyWindProc = spawn(rustyWindPath, rustyWindArgs);
