@@ -3,8 +3,8 @@ export default {
 	rules: {
 		'subject-case': [
 			2,
-			'always',
-			['sentence-case'],
+			'never',
+			['start-case', 'pascal-case', 'upper-case'],
 		],
 	},
 };
