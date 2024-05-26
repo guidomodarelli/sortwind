@@ -4,12 +4,7 @@ import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
 import { sortClassString, getTextMatch, buildMatchers } from './utils';
 import { spawn } from 'child_process';
 import { rustyWindPath } from 'rustywind';
-
-export type LangConfig =
-	| string
-	| string[]
-	| { regex?: string | string[]; separator?: string; replacement?: string }
-	| undefined;
+import { LangConfig } from "./types";
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =

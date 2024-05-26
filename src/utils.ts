@@ -1,12 +1,4 @@
-import { LangConfig } from './extension';
-
-export interface Options {
-	shouldRemoveDuplicates: boolean;
-	shouldPrependCustomClasses: boolean;
-	customTailwindPrefix: string;
-	separator?: RegExp;
-	replacement?: string;
-}
+import { LangConfig, Matcher, Options } from './types';
 
 /**
  * Sorts a string of CSS classes according to a predefined order.
@@ -93,12 +85,6 @@ function isArrayOfStrings(value: unknown): value is string[] {
 		Array.isArray(value) && value.every((item) => typeof item === 'string')
 	);
 }
-
-export type Matcher = {
-	regex: RegExp[];
-	separator?: RegExp;
-	replacement?: string;
-};
 
 /**
  * The function `buildMatcher` takes a `LangConfig` value and returns a `Matcher`
