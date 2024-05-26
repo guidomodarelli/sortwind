@@ -14,6 +14,10 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 
 <!--
 **[Get it from the VS Code Marketplace →](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)** -->
+[TOC]
+
+## Demo
+
 <p align="center">
   <img src="./img/explainer.gif" alt="Explainer" width="750px">
 </p>
