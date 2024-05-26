@@ -2,7 +2,12 @@
   <img src="./images/banner.png" alt="Explainer" width="750px">
 </p>
 
+[![status](https://img.shields.io/badge/status-stable-blue.svg)](https://github.com/guidomodarelli/sortwind/tree/main)
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EtWuVoWDwakBqro36Ebsob/4NFuaKdLJbPFgpN9AwfEFj/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EtWuVoWDwakBqro36Ebsob/4NFuaKdLJbPFgpN9AwfEFj/tree/main)
+[![License](https://img.shields.io/badge/License-MIT%20-green.svg)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield&issueType=license)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield&issueType=license)
+[![https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg](https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg)](https://good-labs.github.io/greater-good-affirmation)
+[![support](https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg)](https://opencollective.com/sortwind)
 
 Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
