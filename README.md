@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/banner.png" alt="Explainer" width="750px">
+  <img src="./images/banner.png" alt="Banner">
 </p>
 
 [![status](https://img.shields.io/badge/status-stable-blue.svg)](https://github.com/guidomodarelli/sortwind/tree/main)
@@ -11,8 +11,9 @@
 
 Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
-> [!IMPORTANT]
-> This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
+<p align="center">
+  <img src="./images/explainer.gif" alt="Explainer">
+</p>
 
 > [!NOTE]
 > Sortwind runs on save, will remove duplicate classes and can even sort entire workspaces.
@@ -203,3 +204,6 @@ Support this project with your organization. Your logo will show up here with a 
 <a href="https://opencollective.com/headwind/organization/0/website"><img src="https://opencollective.com/headwind/organization/0/avatar.svg"></a>
 <a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a>
 -->
+
+> [!IMPORTANT]
+> This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
