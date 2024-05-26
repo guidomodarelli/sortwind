@@ -6,8 +6,7 @@ import {
 import { LangConfig, Matcher } from '../src/types';
 import * as _ from 'lodash';
 import { describe, expect, it, vitest } from "vitest";
-
-const pjson = require('../package.json');
+import pjson from '../package.json';
 
 const sortOrder: string[] =
 	pjson.contributes.configuration[0].properties['sortwind.defaultSortOrder']
@@ -299,7 +298,7 @@ describe('extract className (jsx) string with single regex', () => {
 			`export function FormGroup({className = '', ...props}) {
 			  return <div className={\``.length,
 		],
-	])('%s', (testName, editorText, expectedTextMatch, expectedStartPosition) => {
+	])('%s', (_testName, editorText, expectedTextMatch, expectedStartPosition) => {
 		const stringRegex =
 			'(?:\\bclass(?:Name)?\\s*=[\\w\\d\\s_,{}()[\\]]*["\'`]([\\w\\d\\s_\\-:/${}]+)["\'`][\\w\\d\\s_,{}()[\\]]*)|(?:\\btw\\s*`([\\w\\d\\s_\\-:/]*)`)';
 		const callback = vitest.fn();
@@ -316,7 +315,7 @@ describe('extract className (jsx) string with single regex', () => {
 });
 
 describe('extract className (jsx) string(s) with multiple regexes', () => {
-	const configRegex: { [key: string]: string } =
+	const configRegex =
 		pjson.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
@@ -441,7 +440,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 			`export function FormGroup({className = '', ...props}) {
 			  return <div className={\``.length,
 		],
-	])('%s', (testName, editorText, expectedTextMatch, expectedStartPosition) => {
+	])('%s', (_testName, editorText, expectedTextMatch, expectedStartPosition) => {
 		for (const jsxLanguage of jsxLanguages) {
 			const callback = vitest.fn();
 
@@ -601,7 +600,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 				},
 			],
 		],
-	])('%s', (testName, editorText, expectedResults) => {
+	])('%s', (_testName, editorText, expectedResults) => {
 		for (const jsxLanguage of jsxLanguages) {
 			const callback = vitest.fn();
 
@@ -626,7 +625,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 });
 
 describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', () => {
-	const configRegex: { [key: string]: string } =
+	const configRegex =
 		pjson.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
@@ -673,7 +672,7 @@ describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', (
 				},
 			],
 		],
-	])('%s', (testName, editorText, expectedResults) => {
+	])('%s', (_testName, editorText, expectedResults) => {
 		for (const jsxLanguage of jsxLanguages) {
 			const callback = vitest.fn();
 

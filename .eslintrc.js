@@ -1,20 +1,27 @@
 module.exports = {
 	root: true,
+	env: {
+		node: true,
+	},
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		parser: '@typescript-eslint/parser',
 		requireConfigFile: false,
 	},
 	overrides: [
 		{
 			files: ['**/*.{ts,js}'],
 			extends: [
-				'plugin:import/errors',
-				'plugin:import/warnings'
+				'plugin:import/recommended',
+				'eslint:recommended',
+				'plugin:@typescript-eslint/recommended'
 			],
 			settings: {
 				allow: [
 					'warn',
 					'error'
+				],
+				'import/core-modules': [
+					'vscode'
 				],
 				'import/resolver': {
 					node: {
@@ -31,7 +38,22 @@ module.exports = {
 					}
 				}
 			},
-			rules: {}
+			rules: {
+				'no-useless-escape': "off",
+				"no-unused-vars": "off",
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"args": "all",
+						"argsIgnorePattern": "^_",
+						"caughtErrors": "all",
+						"caughtErrorsIgnorePattern": "^_",
+						"destructuredArrayIgnorePattern": "^_",
+						"varsIgnorePattern": "^_",
+						"ignoreRestSiblings": true
+					}
+				]
+			}
 		},
 		{
 			files: ['**/*.json'],

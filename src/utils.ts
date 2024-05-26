@@ -21,7 +21,7 @@ export function sortClassString(
 	// prepend custom tailwind prefix to all tailwind sortOrder-classes
 	const sortOrderClone = [...sortOrder];
 	if (options.customTailwindPrefix.length > 0) {
-		for (var i = 0; i < sortOrderClone.length; i++) {
+		for (let i = 0; i < sortOrderClone.length; i++) {
 			sortOrderClone[i] = options.customTailwindPrefix + sortOrderClone[i];
 		}
 	}
