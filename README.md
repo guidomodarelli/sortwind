@@ -1,4 +1,5 @@
-# Sortwind
+<img src="./banner.png" alt="Explainer" width="750px">
+
 
 Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
