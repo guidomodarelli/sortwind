@@ -1,6 +1,6 @@
 # Sortwind
 
-Headwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
+Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
 > [!IMPORTANT]
 > This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
@@ -8,7 +8,7 @@ Headwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 <!-- [![CircleCI](https://circleci.com/gh/heybourn/headwind.svg?style=svg)](https://circleci.com/gh/heybourn/headwind) -->
 
 > [!NOTE]
-> Headwind runs on save, will remove duplicate classes and can even sort entire workspaces.
+> Sortwind runs on save, will remove duplicate classes and can even sort entire workspaces.
 
 <!--
 **[Get it from the VS Code Marketplace →](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)** -->
@@ -17,23 +17,23 @@ Headwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 
 ## Usage
 
-You can install Headwind via the VS Code Marketplace, or package it yourself using [vsce](https://code.visualstudio.com/api/working-with-extensions/publishing-extension). Headwind works globally once installed and will run on save if a `tailwind.config.js` file is present within your working directory.
+You can install Sortwind via the VS Code Marketplace, or package it yourself using [vsce](https://code.visualstudio.com/api/working-with-extensions/publishing-extension). Sortwind works globally once installed and will run on save if a `tailwind.config.js` file is present within your working directory.
 
-You can also trigger Headwind by:
+You can also trigger Sortwind by:
 
 * Pressing ALT + Shift + T on Mac
 * Pressing CTRL + ALT + T on Windows
 * Pressing CTRL + ALT + T on Linux
 
-Headwind can sort individual files by running 'Sort Tailwind CSS Classes' via the Command Palette. Workspaces can also be sorted by running 'Sort Tailwind CSS Classes on Entire Workspace'.
+Sortwind can sort individual files by running 'Sort Tailwind CSS Classes' via the Command Palette. Workspaces can also be sorted by running 'Sort Tailwind CSS Classes on Entire Workspace'.
 
 Any breakpoints or unknown classes will be moved to the end of the class list, whilst duplicate classes will be removed.
 
 ## Customisation
 
-Headwind ships with a default class order (located in [package.json](package.json)). You can edit this (and other settings) to your liking on the extension settings page.
+Sortwind ships with a default class order (located in [package.json](package.json)). You can edit this (and other settings) to your liking on the extension settings page.
 
-### `headwind.classRegex`
+### `sortwind.classRegex`
 
 An object with language IDs as keys and their values determining the regex to search for Tailwind CSS classes.
 The default is located in [package.json](package.json) but this can be customized to suit your needs.
@@ -43,7 +43,7 @@ There can be multiple capturing groups, that should only contain a string with T
 Example from `package.json`:
 
 ```json
-"headwind.classRegex": {
+"sortwind.classRegex": {
     "html": "\\bclass\\s*=\\s*[\\\"\\']([_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\']",
     "javascriptreact": "(?:\\bclassName\\s*=\\s*[\\\"\\']([_a-zA-Z0-9\\s\\-\\:\\/]+)[\\\"\\'])|(?:\\btw\\s*`([_a-zA-Z0-9\\s\\-\\:\\/]*)`)"
 }
@@ -56,7 +56,7 @@ A multi-step regex can be specified by using an array of regexes to be executed 
 Example from `package.json`:
 
 ```js
-"headwind.classRegex": {
+"sortwind.classRegex": {
     "javascript": [
         "(?:\\bclass(?:Name)?\\s*=\\s*(?:{([\\w\\d\\s_\\-:/${}()[\\]\"'`,]+)})|([\"'`][\\w\\d\\s_\\-:/]+[\"'`]))|(?:\\btw\\s*(`[\\w\\d\\s_\\-:/]+`))",
         "(?:[\"'`]([\\w\\d\\s_\\-:/${}()[\\]\"']+)[\"'`])"
@@ -79,7 +79,7 @@ Optionally a configuration object can be passed to specify additional options fo
 Example from `package.json`:
 
 ```js
-"headwind.classRegex": {
+"sortwind.classRegex": {
     "jade": [
         {
             "regex": "\\.([\\._a-zA-Z0-9\\-]+)",
@@ -126,35 +126,35 @@ The result of `valueMatch` should be the class text _exactly_, with no other cha
 
 Good example value: `valueMatch w-64 h-full bg-blue-400 relative`
 
-**Note**: Changes made to Headwind's JSON configuration options may not take effect immediately. When experimenting with custom `classRegex`, after each change you should open the control pallete (Ctrl/Cmd + Shift + P) and run `Developer: Reload Window` to ensure changes are applied.
+**Note**: Changes made to Sortwind's JSON configuration options may not take effect immediately. When experimenting with custom `classRegex`, after each change you should open the control pallete (Ctrl/Cmd + Shift + P) and run `Developer: Reload Window` to ensure changes are applied.
 
 <hr>
 
-### `headwind.defaultSortOrder`
+### `sortwind.defaultSortOrder`
 
-An array that determines Headwind's default sort order.
+An array that determines Sortwind's default sort order.
 
-### `headwind.removeDuplicates`
+### `sortwind.removeDuplicates`
 
-Headwind will remove duplicate class names by default. This can be toggled on or off.
+Sortwind will remove duplicate class names by default. This can be toggled on or off.
 
-`"headwind.removeDuplicates": false`
+`"sortwind.removeDuplicates": false`
 
-### `headwind.prependCustomClasses`
+### `sortwind.prependCustomClasses`
 
-Headwind will append custom class names by default. They can be prepended instead.
+Sortwind will append custom class names by default. They can be prepended instead.
 
-`"headwind.prependCustomClasses": true`
+`"sortwind.prependCustomClasses": true`
 
-### `headwind.runOnSave`
+### `sortwind.runOnSave`
 
-Headwind will run on save by default (if a `tailwind.config.js` file is present within your working directory). This can be toggled on or off.
+Sortwind will run on save by default (if a `tailwind.config.js` file is present within your working directory). This can be toggled on or off.
 
-`"headwind.runOnSave": false`
+`"sortwind.runOnSave": false`
 
 ## Contributing
 
-Headwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+Sortwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 <!-- ## Contributors -->
 <!--

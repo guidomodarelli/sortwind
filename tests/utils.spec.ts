@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 const pjson = require('../package.json');
 
 const sortOrder: string[] =
-	pjson.contributes.configuration[0].properties['headwind.defaultSortOrder']
+	pjson.contributes.configuration[0].properties['sortwind.defaultSortOrder']
 		.default;
 const customClass: string = 'yoda';
 
@@ -318,7 +318,7 @@ describe('extract className (jsx) string with single regex', () => {
 
 describe('extract className (jsx) string(s) with multiple regexes', () => {
 	const configRegex: { [key: string]: string } =
-		pjson.contributes.configuration[0].properties['headwind.classRegex']
+		pjson.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
 		'javascript',
@@ -628,7 +628,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 
 describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', () => {
 	const configRegex: { [key: string]: string } =
-		pjson.contributes.configuration[0].properties['headwind.classRegex']
+		pjson.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
 		'javascript',

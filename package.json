@@ -1,6 +1,6 @@
 {
-    "name": "headwind",
-    "displayName": "Headwind",
+    "name": "sortwind",
+    "displayName": "Sortwind",
     "description": "An opinionated class sorter for Tailwind CSS",
     "keywords": [
         "tailwind",
@@ -18,7 +18,7 @@
     "publisher": "heybourn",
     "license": "MIT",
     "author": "Ryan Heybourn <ryan@heybourn.com>",
-    "repository": "https://github.com/heybourn/headwind",
+    "repository": "https://github.com/guidomodarelli/sortwind",
     "engines": {
         "vscode": "^1.32.0"
     },
@@ -27,24 +27,24 @@
     ],
     "activationEvents": [
         "workspaceContains:**/tailwind.config.js",
-        "onCommand:headwind.sortTailwindClasses",
-        "onCommand:headwind.sortTailwindClassesOnWorkspace"
+        "onCommand:sortwind.sortTailwindClasses",
+        "onCommand:sortwind.sortTailwindClassesOnWorkspace"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "headwind.sortTailwindClasses",
-                "title": "Headwind: Sort Tailwind CSS Classes"
+                "command": "sortwind.sortTailwindClasses",
+                "title": "Sortwind: Sort Tailwind CSS Classes"
             },
             {
-                "command": "headwind.sortTailwindClassesOnWorkspace",
-                "title": "Headwind: Sort Tailwind CSS Classes on Entire Workspace"
+                "command": "sortwind.sortTailwindClassesOnWorkspace",
+                "title": "Sortwind: Sort Tailwind CSS Classes on Entire Workspace"
             }
         ],
         "keybindings": [
             {
-                "command": "headwind.sortTailwindClasses",
+                "command": "sortwind.sortTailwindClasses",
                 "key": "ctrl+alt+t",
                 "mac": "shift+alt+t",
                 "when": "editorFocus"
@@ -52,9 +52,9 @@
         ],
         "configuration": [
             {
-                "title": "Headwind",
+                "title": "Sortwind",
                 "properties": {
-                    "headwind.defaultSortOrder": {
+                    "sortwind.defaultSortOrder": {
                         "type": "array",
                         "default": [
                             "container",
@@ -5278,7 +5278,7 @@
                         "description": "Sort order: A string array that determines the default sort order.",
                         "scope": "window"
                     },
-                    "headwind.classRegex": {
+                    "sortwind.classRegex": {
                         "type": "object",
                         "default": {
                             "jade": [
@@ -5311,25 +5311,25 @@
                         "description": "An object with language IDs as keys and their values determining the regex to search for Tailwind CSS classes.",
                         "scope": "window"
                     },
-                    "headwind.runOnSave": {
+                    "sortwind.runOnSave": {
                         "type": "boolean",
                         "default": true,
-                        "description": "A flag that controls whether or not Headwind will sort your Tailwind CSS classes on save.",
+                        "description": "A flag that controls whether or not Sortwind will sort your Tailwind CSS classes on save.",
                         "scope": "window"
                     },
-                    "headwind.removeDuplicates": {
+                    "sortwind.removeDuplicates": {
                         "default": true,
-                        "description": "A flag that controls whether or not Headwind will remove duplicate Tailwind CSS classes.",
+                        "description": "A flag that controls whether or not Sortwind will remove duplicate Tailwind CSS classes.",
                         "type": "boolean",
                         "scope": "window"
                     },
-                    "headwind.prependCustomClasses": {
+                    "sortwind.prependCustomClasses": {
                         "default": false,
-                        "description": "A flag that controls whether or not Headwind will move custom CSS classes before (true) or after (false) the Tailwind CSS classes.",
+                        "description": "A flag that controls whether or not Sortwind will move custom CSS classes before (true) or after (false) the Tailwind CSS classes.",
                         "type": "boolean",
                         "scope": "window"
                     },
-                    "headwind.customTailwindPrefix": {
+                    "sortwind.customTailwindPrefix": {
                         "default": "",
                         "description": "If the Tailwind Prefix function is used, this can be specified here (e.g. tw-).",
                         "type": "string",

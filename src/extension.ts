@@ -13,24 +13,24 @@ export type LangConfig =
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =
-	config.get('headwind.classRegex') || {};
+	config.get('sortwind.classRegex') || {};
 
-const sortOrder = config.get('headwind.defaultSortOrder');
+const sortOrder = config.get('sortwind.defaultSortOrder');
 
-const customTailwindPrefixConfig = config.get('headwind.customTailwindPrefix');
+const customTailwindPrefixConfig = config.get('sortwind.customTailwindPrefix');
 const customTailwindPrefix =
 	typeof customTailwindPrefixConfig === 'string'
 		? customTailwindPrefixConfig
 		: '';
 
-const shouldRemoveDuplicatesConfig = config.get('headwind.removeDuplicates');
+const shouldRemoveDuplicatesConfig = config.get('sortwind.removeDuplicates');
 const shouldRemoveDuplicates =
 	typeof shouldRemoveDuplicatesConfig === 'boolean'
 		? shouldRemoveDuplicatesConfig
 		: true;
 
 const shouldPrependCustomClassesConfig = config.get(
-	'headwind.prependCustomClasses'
+	'sortwind.prependCustomClasses'
 );
 const shouldPrependCustomClasses =
 	typeof shouldPrependCustomClassesConfig === 'boolean'
@@ -39,7 +39,7 @@ const shouldPrependCustomClasses =
 
 export function activate(context: ExtensionContext) {
 	let disposable = commands.registerTextEditorCommand(
-		'headwind.sortTailwindClasses',
+		'sortwind.sortTailwindClasses',
 		function (editor, edit) {
 			const editorText = editor.document.getText();
 			const editorLangId = editor.document.languageId;
@@ -78,12 +78,12 @@ export function activate(context: ExtensionContext) {
 	);
 
 	let runOnProject = commands.registerCommand(
-		'headwind.sortTailwindClassesOnWorkspace',
+		'sortwind.sortTailwindClassesOnWorkspace',
 		() => {
 			let workspaceFolder = workspace.workspaceFolders || [];
 			if (workspaceFolder[0]) {
 				window.showInformationMessage(
-					`Running Headwind on: ${workspaceFolder[0].uri.fsPath}`
+					`Running Sortwind on: ${workspaceFolder[0].uri.fsPath}`
 				);
 
 				let rustyWindArgs = [
@@ -105,7 +105,7 @@ export function activate(context: ExtensionContext) {
 				rustyWindProc.stderr.on('data', (data) => {
 					if (data && data.toString() !== '') {
 						console.log('rustywind stderr:\n', data.toString());
-						window.showErrorMessage(`Headwind error: ${data.toString()}`);
+						window.showErrorMessage(`Sortwind error: ${data.toString()}`);
 					}
 				});
 			}
@@ -116,10 +116,10 @@ export function activate(context: ExtensionContext) {
 	context.subscriptions.push(disposable);
 
 	// if runOnSave is enabled organize tailwind classes before saving
-	if (config.get('headwind.runOnSave')) {
+	if (config.get('sortwind.runOnSave')) {
 		context.subscriptions.push(
 			workspace.onWillSaveTextDocument((_e) => {
-				commands.executeCommand('headwind.sortTailwindClasses');
+				commands.executeCommand('sortwind.sortTailwindClasses');
 			})
 		);
 	}
