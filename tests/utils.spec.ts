@@ -612,13 +612,13 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 			expect(typeof expectedResults !== 'string').toBeTruthy();
 
 			if (typeof expectedResults !== 'string') {
-				expectedResults.forEach((expectedResult, idx) => {
+				for (const [index, expectedResult] of expectedResults.entries()) {
 					expect(callback).toHaveBeenNthCalledWith(
-						idx + 1,
+						index + 1,
 						expectedResult.match,
 						expectedResult.startPosition
 					);
-				});
+				}
 			}
 		}
 	});
@@ -684,13 +684,13 @@ describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', (
 			expect(typeof expectedResults !== 'string').toBeTruthy();
 
 			if (typeof expectedResults !== 'string') {
-				expectedResults.forEach((expectedResult, idx) => {
+				for (const [index, expectedResult] of expectedResults.entries()) {
 					expect(callback).toHaveBeenNthCalledWith(
-						idx + 1,
+						index + 1,
 						expectedResult.match,
 						expectedResult.startPosition
 					);
-				});
+				}
 			}
 		}
 	});
@@ -749,7 +749,7 @@ describe('buildMatchers', () => {
 					'(?:\\bclass(?:Name)?\\s*=\\s*(?:{([\\w\\d\\s_\\-:/${}()[\\]"\'`,]+)})|(["\'`][\\w\\d\\s_\\-:/]+["\'`]))|(?:\\btw\\s*(`[\\w\\d\\s_\\-:/]+`))',
 					'(?:["\'`]([\\w\\d\\s_\\-:/${}()[\\]"\']+)["\'`])',
 				],
-				separator: '\\+\\+',
+				separator: String.raw`\+\+`,
 				replacement: '++',
 			},
 			[
@@ -790,7 +790,7 @@ describe('buildMatchers', () => {
 				},
 				{
 					regex: '(?:["\'`]([\\w\\d\\s_\\-:/${}()[\\]"\']+)["\'`])',
-					separator: '\\.',
+					separator: String.raw`\.`,
 					replacement: '.',
 				},
 			],

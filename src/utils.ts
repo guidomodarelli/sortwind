@@ -55,22 +55,21 @@ function sortClassArray(
 
 	// append the classes that were not in the sort order if configured this way
 	const customClassesToAppend = classArray.filter(
-		(el) => shouldPrependCustomClasses && sortOrder.indexOf(el) === -1
+		(element) => shouldPrependCustomClasses && !sortOrder.includes(element)
 	);
 
 	const sortedClassesInOrder = classArray
 		// take the classes that are in the sort order
-		.filter((el) => sortOrder.indexOf(el) !== -1)
+		.filter((element) => sortOrder.includes(element))
 		.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
 
 	// prepend the classes that were not in the sort order if configured this way
 	const customClassesToPrepend = classArray.filter(
-		(el) => !shouldPrependCustomClasses && sortOrder.indexOf(el) === -1
+		(element) =>
+			!shouldPrependCustomClasses && !sortOrder.includes(element)
 	);
 
-	result.push(...customClassesToAppend);
-	result.push(...sortedClassesInOrder);
-	result.push(...customClassesToPrepend);
+	result.push(...customClassesToAppend, ...sortedClassesInOrder, ...customClassesToPrepend);
 
 	return result;
 }
@@ -119,17 +118,21 @@ function buildMatcher(value: LangConfig): Matcher {
 			regex: [],
 		};
 	} else {
+		let regex: RegExp[] = [];
+		if (typeof value.regex === 'string') {
+			regex = [new RegExp(value.regex, 'gi')];
+		} else if (isArrayOfStrings(value.regex)) {
+			regex = value.regex.map((v) => new RegExp(v, 'gi'));
+		}
+
+		let separator;
+		if (typeof value.separator === 'string') {
+			separator = new RegExp(value.separator, 'g');
+		}
+
 		return {
-			regex:
-				typeof value.regex === 'string'
-					? [new RegExp(value.regex, 'gi')]
-					: isArrayOfStrings(value.regex)
-					? value.regex.map((v) => new RegExp(v, 'gi'))
-					: [],
-			separator:
-				typeof value.separator === 'string'
-					? new RegExp(value.separator, 'g')
-					: undefined,
+			regex,
+			separator,
 			replacement: value.replacement || value.separator,
 		};
 	}
@@ -146,7 +149,7 @@ export function buildMatchers(value: LangConfig | LangConfig[]): Matcher[] {
 	if (value == undefined) {
 		return [];
 	} else if (Array.isArray(value)) {
-		if (!value.length) {
+		if (value.length === 0) {
 			return [];
 		} else if (!isArrayOfStrings(value)) {
 			return value.map((v) => buildMatcher(v));
@@ -178,12 +181,12 @@ export function getTextMatch(
 	callback: TextMatchCallback,
 	startPosition: number = 0
 ): void {
-	if (regexes.length >= 1) {
+	if (regexes.length > 0) {
 		let wrapper: RegExpExecArray | null;
 		while ((wrapper = regexes[0].exec(text)) !== null) {
 			const wrapperMatch = wrapper[0];
 			const valueMatchIndex = wrapper.findIndex(
-				(match, idx) => idx !== 0 && match
+				(match, index) => index !== 0 && match
 			);
 			const valueMatch = wrapper[valueMatchIndex];
 

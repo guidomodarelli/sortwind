@@ -2,7 +2,7 @@
 
 import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
 import { sortClassString, getTextMatch, buildMatchers } from './utils';
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
 import { LangConfig, Options } from "./types";
 
@@ -85,7 +85,7 @@ export function activate(context: ExtensionContext) {
 					workspaceFolder[0].uri.fsPath,
 					'--write',
 					shouldRemoveDuplicates ? '' : '--allow-duplicates',
-				].filter((arg) => arg !== '');
+				].filter((argument) => argument !== '');
 
 				const rustyWindProc = spawn(rustyWindPath, rustyWindArgs);
 
@@ -107,13 +107,12 @@ export function activate(context: ExtensionContext) {
 		}
 	);
 
-	context.subscriptions.push(runOnProject);
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(runOnProject, disposable);
 
 	// if runOnSave is enabled organize tailwind classes before saving
 	if (config.get('sortwind.runOnSave')) {
 		context.subscriptions.push(
-			workspace.onWillSaveTextDocument((_e) => {
+			workspace.onWillSaveTextDocument((_textDocumentWillSaveEvent) => {
 				commands.executeCommand('sortwind.sortTailwindClasses');
 			})
 		);

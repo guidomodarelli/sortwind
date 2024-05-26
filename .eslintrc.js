@@ -13,7 +13,11 @@ module.exports = {
 			extends: [
 				'plugin:import/recommended',
 				'eslint:recommended',
-				'plugin:@typescript-eslint/recommended'
+				'plugin:@typescript-eslint/recommended',
+				'plugin:unicorn/recommended'
+			],
+			plugins: [
+				'unicorn',
 			],
 			settings: {
 				allow: [
@@ -52,7 +56,24 @@ module.exports = {
 						"varsIgnorePattern": "^_",
 						"ignoreRestSiblings": true
 					}
-				]
+				],
+				'unicorn/prevent-abbreviations': [
+					2,
+					{
+						checkProperties: true,
+						checkVariables: true,
+						checkDefaultAndNamespaceImports: 'internal',
+						checkShorthandImports: 'internal',
+						checkShorthandProperties: true,
+						checkFilenames: true,
+						extendDefaultReplacements: true,
+						extendDefaultAllowList: true,
+						replacements: {},
+						ignore: [ 'i' ],
+					},
+				],
+				'unicorn/prefer-module': "off",
+				'unicorn/better-regex': "off",
 			}
 		},
 		{
