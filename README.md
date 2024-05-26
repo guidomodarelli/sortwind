@@ -1,13 +1,19 @@
 <p align="center">
-  <img src="./images/banner.png" alt="Explainer" width="750px">
+  <img src="./images/banner.png" alt="Banner" width="750px">
 </p>
 
+[![status](https://img.shields.io/badge/status-stable-blue.svg)](https://github.com/guidomodarelli/sortwind/tree/main)
 [![CircleCI](https://dl.circleci.com/status-badge/img/circleci/EtWuVoWDwakBqro36Ebsob/4NFuaKdLJbPFgpN9AwfEFj/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/circleci/EtWuVoWDwakBqro36Ebsob/4NFuaKdLJbPFgpN9AwfEFj/tree/main)
+[![License](https://img.shields.io/badge/License-MIT%20-green.svg)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield&issueType=license)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield&issueType=license)
+[![https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg](https://good-labs.github.io/greater-good-affirmation/assets/images/badge.svg)](https://good-labs.github.io/greater-good-affirmation)
+[![support](https://img.shields.io/badge/sponsor-Open%20Collective-blue.svg)](https://opencollective.com/sortwind)
 
 Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
-> [!IMPORTANT]
-> This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
+<p align="center">
+  <img src="./images/explainer.gif" alt="Explainer">
+</p>
 
 > [!NOTE]
 > Sortwind runs on save, will remove duplicate classes and can even sort entire workspaces.
@@ -18,18 +24,20 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 **Table of contents**
 
 <!-- vscode-markdown-toc -->
-* 1. [Demo](#Demo)
-* 2. [Usage](#Usage)
-* 3. [Customisation](#Customisation)
-  * 3.1. [`sortwind.classRegex`](#sortwind.classRegex)
-    * 3.1.1. [Multi-step Regex](#Multi-stepRegex)
-    * 3.1.2. [Configuration Object](#ConfigurationObject)
-    * 3.1.3. [Debugging Custom Regex](#DebuggingCustomRegex)
-  * 3.2. [`sortwind.defaultSortOrder`](#sortwind.defaultSortOrder)
-  * 3.3. [`sortwind.removeDuplicates`](#sortwind.removeDuplicates)
-  * 3.4. [`sortwind.prependCustomClasses`](#sortwind.prependCustomClasses)
-  * 3.5. [`sortwind.runOnSave`](#sortwind.runOnSave)
-* 4. [Contributing](#Contributing)
+* 1. [Usage](#Usage)
+* 2. [Customisation](#Customisation)
+	* 2.1. [`sortwind.classRegex`](#sortwind.classRegex)
+		* 2.1.1. [Multi-step Regex](#Multi-stepRegex)
+		* 2.1.2. [Configuration Object](#ConfigurationObject)
+		* 2.1.3. [Debugging Custom Regex](#DebuggingCustomRegex)
+	* 2.2. [`sortwind.defaultSortOrder`](#sortwind.defaultSortOrder)
+	* 2.3. [`sortwind.removeDuplicates`](#sortwind.removeDuplicates)
+	* 2.4. [`sortwind.prependCustomClasses`](#sortwind.prependCustomClasses)
+	* 2.5. [`sortwind.runOnSave`](#sortwind.runOnSave)
+* 3. [Contributing](#Contributing)
+* 4. [Contributors](#Contributors)
+	* 4.1. [Financial Contributors](#FinancialContributors)
+		* 4.1.1. [Organizations](#Organizations)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -37,13 +45,7 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
 
-##  1. <a name='Demo'></a>Demo
-
-<p align="center">
-  <img src="./images/explainer.gif" alt="Explainer" width="750px">
-</p>
-
-##  2. <a name='Usage'></a>Usage
+##  1. <a name='Usage'></a>Usage
 
 You can install Sortwind via the VS Code Marketplace, or package it yourself using [vsce](https://code.visualstudio.com/api/working-with-extensions/publishing-extension). Sortwind works globally once installed and will run on save if a `tailwind.config.js` file is present within your working directory.
 
@@ -57,11 +59,11 @@ Sortwind can sort individual files by running 'Sort Tailwind CSS Classes' via th
 
 Any breakpoints or unknown classes will be moved to the end of the class list, whilst duplicate classes will be removed.
 
-##  3. <a name='Customisation'></a>Customisation
+##  2. <a name='Customisation'></a>Customisation
 
 Sortwind ships with a default class order (located in [package.json](package.json)). You can edit this (and other settings) to your liking on the extension settings page.
 
-###  3.1. <a name='sortwind.classRegex'></a>`sortwind.classRegex`
+###  2.1. <a name='sortwind.classRegex'></a>`sortwind.classRegex`
 
 An object with language IDs as keys and their values determining the regex to search for Tailwind CSS classes.
 The default is located in [package.json](package.json) but this can be customized to suit your needs.
@@ -77,7 +79,7 @@ Example from `package.json`:
 }
 ```
 
-####  3.1.1. <a name='Multi-stepRegex'></a>Multi-step Regex
+####  2.1.1. <a name='Multi-stepRegex'></a>Multi-step Regex
 
 A multi-step regex can be specified by using an array of regexes to be executed in order.
 
@@ -96,7 +98,7 @@ The first regex will look for JSX `class` or `className` attributes or [twin.mac
 
 The second regex will then look for class names to be sorted within these matches.
 
-####  3.1.2. <a name='ConfigurationObject'></a>Configuration Object
+#### 2.1.2. <a name='ConfigurationObject'></a>Configuration Object
 
 Optionally a configuration object can be passed to specify additional options for sorting class names.
 
@@ -119,7 +121,7 @@ Example from `package.json`:
 }
 ```
 
-####  3.1.3. <a name='DebuggingCustomRegex'></a>Debugging Custom Regex
+####  2.1.3. <a name='DebuggingCustomRegex'></a>Debugging Custom Regex
 
 To debug custom `classRegex`, you can use the code below:
 
@@ -158,34 +160,35 @@ Good example value: `valueMatch w-64 h-full bg-blue-400 relative`
 
 <hr>
 
-###  3.2. <a name='sortwind.defaultSortOrder'></a>`sortwind.defaultSortOrder`
+###  2.2. <a name='sortwind.defaultSortOrder'></a>`sortwind.defaultSortOrder`
 
 An array that determines Sortwind's default sort order.
 
-###  3.3. <a name='sortwind.removeDuplicates'></a>`sortwind.removeDuplicates`
+###  2.3. <a name='sortwind.removeDuplicates'></a>`sortwind.removeDuplicates`
 
 Sortwind will remove duplicate class names by default. This can be toggled on or off.
 
 `"sortwind.removeDuplicates": true`
 
-###  3.4. <a name='sortwind.prependCustomClasses'></a>`sortwind.prependCustomClasses`
+###  2.4. <a name='sortwind.prependCustomClasses'></a>`sortwind.prependCustomClasses`
 
 Sortwind will append custom class names by default. They can be prepended instead.
 
 `"sortwind.prependCustomClasses": true`
 
-###  3.5. <a name='sortwind.runOnSave'></a>`sortwind.runOnSave`
+###  2.5. <a name='sortwind.runOnSave'></a>`sortwind.runOnSave`
 
 Sortwind will run on save by default (if a `tailwind.config.js` file is present within your working directory). This can be toggled on or off.
 
 `"sortwind.runOnSave": true`
 
-##  4. <a name='Contributing'></a>Contributing
+##  3. <a name='Contributing'></a>Contributing
 
 Sortwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
-<!-- ## Contributors -->
 <!--
+##  4. <a name='Contributors'></a>Contributors
+
 ###  4.1. <a name='FinancialContributors'></a>Financial Contributors
 
 Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/headwind/contribute)] -->
@@ -202,6 +205,8 @@ Support this project with your organization. Your logo will show up here with a 
 <a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a> <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=shield"/></a>
 -->
 
-
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_large)
+
+> [!IMPORTANT]
+> This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
