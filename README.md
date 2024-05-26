@@ -30,8 +30,6 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
   * 3.4. [`sortwind.prependCustomClasses`](#sortwind.prependCustomClasses)
   * 3.5. [`sortwind.runOnSave`](#sortwind.runOnSave)
 * 4. [Contributing](#Contributing)
-  * 4.1. [Financial Contributors](#FinancialContributors)
-    * 4.1.1. [Organizations](#Organizations)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
