@@ -4,8 +4,8 @@ import {
 	buildMatchers,
 } from '../src/utils';
 import { LangConfig, Matcher } from '../src/types';
-import 'jest';
 import * as _ from 'lodash';
+import { describe, expect, it, vitest } from "vitest";
 
 const pjson = require('../package.json');
 
@@ -302,7 +302,7 @@ describe('extract className (jsx) string with single regex', () => {
 	])('%s', (testName, editorText, expectedTextMatch, expectedStartPosition) => {
 		const stringRegex =
 			'(?:\\bclass(?:Name)?\\s*=[\\w\\d\\s_,{}()[\\]]*["\'`]([\\w\\d\\s_\\-:/${}]+)["\'`][\\w\\d\\s_,{}()[\\]]*)|(?:\\btw\\s*`([\\w\\d\\s_\\-:/]*)`)';
-		const callback = jest.fn();
+		const callback = vitest.fn();
 
 		for (const matcher of buildMatchers(stringRegex)) {
 			getTextMatch(matcher.regex, editorText.toString(), callback);
@@ -443,7 +443,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 		],
 	])('%s', (testName, editorText, expectedTextMatch, expectedStartPosition) => {
 		for (const jsxLanguage of jsxLanguages) {
-			const callback = jest.fn();
+			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
 				getTextMatch(matcher.regex, editorText.toString(), callback);
@@ -457,7 +457,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 	});
 
 	it('should do nothing if no regexes (empty array) are provided', () => {
-		const callback = jest.fn();
+		const callback = vitest.fn();
 		getTextMatch([], 'test', callback);
 		expect(callback).toHaveBeenCalledTimes(0);
 	});
@@ -603,7 +603,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 		],
 	])('%s', (testName, editorText, expectedResults) => {
 		for (const jsxLanguage of jsxLanguages) {
-			const callback = jest.fn();
+			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
 				getTextMatch(matcher.regex, editorText.toString(), callback);
@@ -675,7 +675,7 @@ describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', (
 		],
 	])('%s', (testName, editorText, expectedResults) => {
 		for (const jsxLanguage of jsxLanguages) {
-			const callback = jest.fn();
+			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
 				getTextMatch(matcher.regex, editorText.toString(), callback);
