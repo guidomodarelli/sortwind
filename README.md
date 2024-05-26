@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/banner.png" alt="Banner">
+  <img src="./images/banner.png" alt="Banner" width="750px">
 </p>
 
 [![status](https://img.shields.io/badge/status-stable-blue.svg)](https://github.com/guidomodarelli/sortwind/tree/main)
