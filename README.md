@@ -166,7 +166,7 @@ An array that determines Sortwind's default sort order.
 
 Sortwind will remove duplicate class names by default. This can be toggled on or off.
 
-`"sortwind.removeDuplicates": false`
+`"sortwind.removeDuplicates": true`
 
 ###  3.4. <a name='sortwind.prependCustomClasses'></a>`sortwind.prependCustomClasses`
 
@@ -178,7 +178,7 @@ Sortwind will append custom class names by default. They can be prepended instea
 
 Sortwind will run on save by default (if a `tailwind.config.js` file is present within your working directory). This can be toggled on or off.
 
-`"sortwind.runOnSave": false`
+`"sortwind.runOnSave": true`
 
 ##  4. <a name='Contributing'></a>Contributing
 
