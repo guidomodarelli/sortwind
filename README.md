@@ -1,16 +1,17 @@
-# Headwind
-
-[![CircleCI](https://circleci.com/gh/heybourn/headwind.svg?style=svg)](https://circleci.com/gh/heybourn/headwind)
+# Sortwind
 
 Headwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
 
+> [!IMPORTANT]
+> This project is a fork of [Headwind](https://github.com/heybourn/headwind), created by [Ryan Heybourn](https://github.com/heybourn).
+
+<!-- [![CircleCI](https://circleci.com/gh/heybourn/headwind.svg?style=svg)](https://circleci.com/gh/heybourn/headwind) -->
+
+> [!NOTE]
 > Headwind runs on save, will remove duplicate classes and can even sort entire workspaces.
 
----
-
-**[Get it from the VS Code Marketplace →](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)**
-
-**[Use PHPStorm? Get @WalrusSoup's Headwind port →](https://plugins.jetbrains.com/plugin/13376-tailwind-formatter/)**
+<!--
+**[Get it from the VS Code Marketplace →](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)** -->
 
 <img src="https://github.com/heybourn/headwind/blob/master/img/explainer.gif?raw=true" alt="Explainer" width="750px">
 
@@ -24,7 +25,6 @@ You can also trigger Headwind by:
 * Pressing CTRL + ALT + T on Windows
 * Pressing CTRL + ALT + T on Linux
 
-
 Headwind can sort individual files by running 'Sort Tailwind CSS Classes' via the Command Palette. Workspaces can also be sorted by running 'Sort Tailwind CSS Classes on Entire Workspace'.
 
 Any breakpoints or unknown classes will be moved to the end of the class list, whilst duplicate classes will be removed.
@@ -33,7 +33,7 @@ Any breakpoints or unknown classes will be moved to the end of the class list, w
 
 Headwind ships with a default class order (located in [package.json](package.json)). You can edit this (and other settings) to your liking on the extension settings page.
 
-### `headwind.classRegex`:
+### `headwind.classRegex`
 
 An object with language IDs as keys and their values determining the regex to search for Tailwind CSS classes.
 The default is located in [package.json](package.json) but this can be customized to suit your needs.
@@ -72,9 +72,9 @@ The second regex will then look for class names to be sorted within these matche
 
 Optionally a configuration object can be passed to specify additional options for sorting class names.
 
-- `regex` - specifies the regex to be used to find class names
-- `separator` - regex pattern that is used to separate class names (default: `"\\s+"`)
-- `replacement` - string used to replace separator matches (default: `" "`)
+* `regex` - specifies the regex to be used to find class names
+* `separator` - regex pattern that is used to separate class names (default: `"\\s+"`)
+* `replacement` - string used to replace separator matches (default: `" "`)
 
 Example from `package.json`:
 
@@ -91,9 +91,10 @@ Example from `package.json`:
 }
 ```
 
-#### Debugging Custom Regex:
+#### Debugging Custom Regex
 
 To debug custom `classRegex`, you can use the code below:
+
 ```js
 // Your test string here
 const editorText = `
@@ -129,23 +130,23 @@ Good example value: `valueMatch w-64 h-full bg-blue-400 relative`
 
 <hr>
 
-### `headwind.defaultSortOrder`:
+### `headwind.defaultSortOrder`
 
 An array that determines Headwind's default sort order.
 
-### `headwind.removeDuplicates`:
+### `headwind.removeDuplicates`
 
 Headwind will remove duplicate class names by default. This can be toggled on or off.
 
 `"headwind.removeDuplicates": false`
 
-### `headwind.prependCustomClasses`:
+### `headwind.prependCustomClasses`
 
 Headwind will append custom class names by default. They can be prepended instead.
 
 `"headwind.prependCustomClasses": true`
 
-### `headwind.runOnSave`:
+### `headwind.runOnSave`
 
 Headwind will run on save by default (if a `tailwind.config.js` file is present within your working directory). This can be toggled on or off.
 
@@ -155,18 +156,13 @@ Headwind will run on save by default (if a `tailwind.config.js` file is present 
 
 Headwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
-## Contributors
-
-### Code Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/heybourn/headwind/graphs/contributors"><img src="https://opencollective.com/headwind/contributors.svg?width=890&button=false" /></a>
-
+<!-- ## Contributors -->
+<!--
 ### Financial Contributors
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/headwind/contribute)]
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/headwind/contribute)] -->
 
-#### Individuals
+<!-- #### Individuals
 
 <a href="https://opencollective.com/headwind"><img src="https://opencollective.com/headwind/individuals.svg?width=890"></a>
 
@@ -175,12 +171,4 @@ Become a financial contributor and help us sustain our community. [[Contribute](
 Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/headwind/contribute)]
 
 <a href="https://opencollective.com/headwind/organization/0/website"><img src="https://opencollective.com/headwind/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/2/website"><img src="https://opencollective.com/headwind/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/3/website"><img src="https://opencollective.com/headwind/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/4/website"><img src="https://opencollective.com/headwind/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/5/website"><img src="https://opencollective.com/headwind/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/6/website"><img src="https://opencollective.com/headwind/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/7/website"><img src="https://opencollective.com/headwind/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/8/website"><img src="https://opencollective.com/headwind/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/9/website"><img src="https://opencollective.com/headwind/organization/9/avatar.svg"></a>
+<a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a> -->
