@@ -199,4 +199,9 @@ Become a financial contributor and help us sustain our community. [[Contribute](
 Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/headwind/contribute)]
 
 <a href="https://opencollective.com/headwind/organization/0/website"><img src="https://opencollective.com/headwind/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a> -->
+<a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a> <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=shield"/></a>
+-->
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_large)
