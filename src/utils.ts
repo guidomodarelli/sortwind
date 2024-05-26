@@ -1,4 +1,4 @@
-import { LangConfig, Matcher, Options } from './types';
+import { LangConfig, Matcher, Options, TextMatchCallback } from './types';
 
 /**
  * Sorts a string of CSS classes according to a predefined order.
@@ -175,7 +175,7 @@ export function buildMatchers(value: LangConfig | LangConfig[]): Matcher[] {
 export function getTextMatch(
 	regexes: RegExp[],
 	text: string,
-	callback: (text: string, startPosition: number) => void,
+	callback: TextMatchCallback,
 	startPosition: number = 0
 ): void {
 	if (regexes.length >= 1) {
