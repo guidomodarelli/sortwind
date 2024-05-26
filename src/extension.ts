@@ -5,27 +5,28 @@ import { sortClassString, getTextMatch, buildMatchers } from './utils';
 import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
 import { LangConfig, Options } from "./types";
+import { SortwindConfig } from "./constants/sortwind";
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =
-	config.get('sortwind.classRegex') || {};
+	config.get(SortwindConfig.CLASS_REGEX) || {};
 
-const sortOrder = config.get('sortwind.defaultSortOrder');
+const sortOrder = config.get(SortwindConfig.DEFAULT_SORT_ORDER);
 
-const customTailwindPrefixConfig = config.get('sortwind.customTailwindPrefix');
+const customTailwindPrefixConfig = config.get(SortwindConfig.CUSTOM_TAILWIND_PREFIX);
 const customTailwindPrefix =
 	typeof customTailwindPrefixConfig === 'string'
 		? customTailwindPrefixConfig
 		: '';
 
-const shouldRemoveDuplicatesConfig = config.get('sortwind.removeDuplicates');
+const shouldRemoveDuplicatesConfig = config.get(SortwindConfig.REMOVE_DUPLICATES);
 const shouldRemoveDuplicates =
 	typeof shouldRemoveDuplicatesConfig === 'boolean'
 		? shouldRemoveDuplicatesConfig
 		: true;
 
 const shouldPrependCustomClassesConfig = config.get(
-	'sortwind.prependCustomClasses'
+	SortwindConfig.PREPEND_CUSTOM_CLASSES
 );
 const shouldPrependCustomClasses =
 	typeof shouldPrependCustomClassesConfig === 'boolean'
@@ -34,7 +35,7 @@ const shouldPrependCustomClasses =
 
 export function activate(context: ExtensionContext) {
 	const disposable = commands.registerTextEditorCommand(
-		'sortwind.sortTailwindClasses',
+		SortwindConfig.SORT_TAILWIND_CLASSES,
 		function (editor, edit) {
 			const editorText = editor.document.getText();
 			const editorLangId = editor.document.languageId;
@@ -73,7 +74,7 @@ export function activate(context: ExtensionContext) {
 	);
 
 	const runOnProject = commands.registerCommand(
-		'sortwind.sortTailwindClassesOnWorkspace',
+		SortwindConfig.SORT_TAILWIND_CLASSES_ON_WORKSPACE,
 		() => {
 			const workspaceFolder = workspace.workspaceFolders || [];
 			if (workspaceFolder[0]) {
@@ -110,10 +111,10 @@ export function activate(context: ExtensionContext) {
 	context.subscriptions.push(runOnProject, disposable);
 
 	// if runOnSave is enabled organize tailwind classes before saving
-	if (config.get('sortwind.runOnSave')) {
+	if (config.get(SortwindConfig.RUN_ON_SAVE)) {
 		context.subscriptions.push(
 			workspace.onWillSaveTextDocument((_textDocumentWillSaveEvent) => {
-				commands.executeCommand('sortwind.sortTailwindClasses');
+				commands.executeCommand(SortwindConfig.SORT_TAILWIND_CLASSES);
 			})
 		);
 	}
