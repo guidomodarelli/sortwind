@@ -2,12 +2,12 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10
+      - image: cimg/node:17.2
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -31,5 +31,4 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
       - run: npm run test
