@@ -2,9 +2,8 @@ import {
 	sortClassString,
 	getTextMatch,
 	buildMatchers,
-	Matcher,
 } from '../src/utils';
-import { LangConfig } from '../src/extension';
+import { LangConfig, Matcher } from '../src/types';
 import 'jest';
 import * as _ from 'lodash';
 
