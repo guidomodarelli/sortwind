@@ -4,7 +4,7 @@ import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
 import { sortClassString, getTextMatch, buildMatchers } from './utils';
 import { spawn } from 'child_process';
 import { rustyWindPath } from 'rustywind';
-import { LangConfig } from "./types";
+import { LangConfig, Options } from "./types";
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =
@@ -51,7 +51,7 @@ export function activate(context: ExtensionContext) {
 						editor.document.positionAt(endPosition)
 					);
 
-					const options = {
+					const options: Options = {
 						shouldRemoveDuplicates,
 						shouldPrependCustomClasses,
 						customTailwindPrefix,
