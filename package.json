@@ -32,7 +32,7 @@
         "onCommand:sortwind.sortTailwindClasses",
         "onCommand:sortwind.sortTailwindClassesOnWorkspace"
     ],
-    "main": "./out/extension",
+    "main": "./dist/extension",
     "contributes": {
         "commands": [
             {
