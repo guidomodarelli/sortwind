@@ -33,7 +33,7 @@ const shouldPrependCustomClasses =
 		: false;
 
 export function activate(context: ExtensionContext) {
-	let disposable = commands.registerTextEditorCommand(
+	const disposable = commands.registerTextEditorCommand(
 		'sortwind.sortTailwindClasses',
 		function (editor, edit) {
 			const editorText = editor.document.getText();
@@ -72,22 +72,22 @@ export function activate(context: ExtensionContext) {
 		}
 	);
 
-	let runOnProject = commands.registerCommand(
+	const runOnProject = commands.registerCommand(
 		'sortwind.sortTailwindClassesOnWorkspace',
 		() => {
-			let workspaceFolder = workspace.workspaceFolders || [];
+			const workspaceFolder = workspace.workspaceFolders || [];
 			if (workspaceFolder[0]) {
 				window.showInformationMessage(
 					`Running Sortwind on: ${workspaceFolder[0].uri.fsPath}`
 				);
 
-				let rustyWindArgs = [
+				const rustyWindArgs = [
 					workspaceFolder[0].uri.fsPath,
 					'--write',
 					shouldRemoveDuplicates ? '' : '--allow-duplicates',
 				].filter((arg) => arg !== '');
 
-				let rustyWindProc = spawn(rustyWindPath, rustyWindArgs);
+				const rustyWindProc = spawn(rustyWindPath, rustyWindArgs);
 
 				rustyWindProc.stdout.on(
 					'data',

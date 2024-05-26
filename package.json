@@ -9,7 +9,7 @@
   "repository": "https://github.com/guidomodarelli/sortwind",
   "scripts": {
     "compile": "rm -rf dist/ && tsc -p tsconfig.build.json",
-    "lint": "eslint \"**/*.{js,ts,json}\"",
+    "lint": "eslint \"**/src/*.{js,ts,json}\"",
     "prepare": "husky",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
