@@ -7,11 +7,11 @@ import { LangConfig, Matcher, Options } from './types';
  *
  * @returns The sorted string
  */
-export const sortClassString = (
+export function sortClassString(
 	classString: string,
 	sortOrder: string[],
 	options: Options
-): string => {
+): string {
 	let classArray = classString.split(options.separator || /\s+/g);
 
 	if (options.shouldRemoveDuplicates) {
@@ -33,7 +33,7 @@ export const sortClassString = (
 	);
 
 	return classArray.join(options.replacement || ' ').trim();
-};
+}
 
 /**
  * Sorts an array of CSS classes based on a specific sorting order and an
@@ -80,9 +80,9 @@ function sortClassArray(
  * array with duplicate values removed.
  * @param {string[]} classArray - An array of strings containing class names.
  */
-const removeDuplicates = (classArray: string[]): string[] => [
-	...new Set(classArray),
-];
+function removeDuplicates(classArray: string[]): string[] {
+	return [...new Set(classArray)];
+}
 
 /**
  * The function `isArrayOfStrings` checks if a value is an array containing only
