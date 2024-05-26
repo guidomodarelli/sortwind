@@ -45,22 +45,35 @@ export const sortClassString = (
  * in the sortOrder should be added at the beginning (true) or at the end
  * (false) of the sorted array.
  * @returns {string[]} A new sorted array of CSS classes.
-*/
-const sortClassArray = (
+ */
+function sortClassArray(
 	classArray: string[],
 	sortOrder: string[],
 	shouldPrependCustomClasses: boolean
-): string[] => [
-	...classArray.filter(
+): string[] {
+	const result: string[] = [];
+
+	// append the classes that were not in the sort order if configured this way
+	const customClassesToAppend = classArray.filter(
 		(el) => shouldPrependCustomClasses && sortOrder.indexOf(el) === -1
-	), // append the classes that were not in the sort order if configured this way
-	...classArray
-		.filter((el) => sortOrder.indexOf(el) !== -1) // take the classes that are in the sort order
-		.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b)), // and sort them
-	...classArray.filter(
+	);
+
+	const sortedClassesInOrder = classArray
+		// take the classes that are in the sort order
+		.filter((el) => sortOrder.indexOf(el) !== -1)
+		.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b));
+
+	// prepend the classes that were not in the sort order if configured this way
+	const customClassesToPrepend = classArray.filter(
 		(el) => !shouldPrependCustomClasses && sortOrder.indexOf(el) === -1
-	), // prepend the classes that were not in the sort order if configured this way
-];
+	);
+
+	result.push(...customClassesToAppend);
+	result.push(...sortedClassesInOrder);
+	result.push(...customClassesToPrepend);
+
+	return result;
+}
 
 /**
  * The `removeDuplicates` function takes an array of strings and returns a new
