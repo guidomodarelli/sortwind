@@ -5351,9 +5351,9 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "rm -rf dist/ && tsc -p ./",
+        "compile": "rm -rf dist/ && tsc -p tsconfig.build.json",
         "lint": "tslint ./src/*.ts",
-        "watch": "tsc -watch -p ./",
+        "watch": "tsc -watch -p tsconfig.build.json",
         "test": "vitest",
         "test:watch": "vitest --watch",
         "test:coverage": "vitest --coverage"
