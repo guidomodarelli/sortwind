@@ -5351,7 +5351,7 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
+        "compile": "rm -rf dist/ && tsc -p ./",
         "lint": "tslint ./src/*.ts",
         "watch": "tsc -watch -p ./",
         "test": "vitest",
