@@ -33,5 +33,33 @@ module.exports = {
 			},
 			rules: {}
 		},
+		{
+			files: ['**/*.json'],
+			plugins: ['json-format'],
+			settings: {
+				'json/sort-package-json': [
+					'name',
+					'displayName',
+					'version',
+					'description',
+					'author',
+					'publisher',
+					'license',
+					'repository',
+					'scripts',
+					'dependencies',
+					'devDependencies',
+					'categories',
+					'keywords',
+					'icon',
+					'galleryBanner',
+					'main',
+					'activationEvents',
+					'engines',
+					'contributes',
+				],
+				'json/json-with-comments-files': ['**/tsconfig.json', '.vscode/**'],
+			},
+		},
 	],
 };
