@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./banner.png" alt="Explainer" width="750px">
+  <img src="./images/banner.png" alt="Explainer" width="750px">
 </p>
 
 Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It enforces consistent ordering of classes by parsing your code and reprinting class tags to follow a given order.
@@ -40,7 +40,7 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 ##  1. <a name='Demo'></a>Demo
 
 <p align="center">
-  <img src="./img/explainer.gif" alt="Explainer" width="750px">
+  <img src="./images/explainer.gif" alt="Explainer" width="750px">
 </p>
 
 ##  2. <a name='Usage'></a>Usage
