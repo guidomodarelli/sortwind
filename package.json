@@ -27,6 +27,8 @@
     ],
     "activationEvents": [
         "workspaceContains:**/tailwind.config.js",
+        "workspaceContains:**/tailwind.config.cjs",
+        "workspaceContains:**/tailwind.config.mjs",
         "onCommand:sortwind.sortTailwindClasses",
         "onCommand:sortwind.sortTailwindClassesOnWorkspace"
     ],
