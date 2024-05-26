@@ -95,13 +95,12 @@ export function activate(context: ExtensionContext) {
 				rustyWindProc.stdout.on(
 					'data',
 					(data) =>
-						data &&
-						data.toString() !== '' &&
+						data?.toString() !== '' &&
 						console.log('rustywind stdout:\n', data.toString())
 				);
 
 				rustyWindProc.stderr.on('data', (data) => {
-					if (data && data.toString() !== '') {
+					if (data?.toString() !== '') {
 						console.log('rustywind stderr:\n', data.toString());
 						window.showErrorMessage(`Sortwind error: ${data.toString()}`);
 					}
