@@ -41,6 +41,9 @@ jobs:
             - node_modules
             - src
             - package.json
+            - .eslintrc.js
+            - .eslintignore
+            - .prettierrc
 
   lint:
     executor: node
