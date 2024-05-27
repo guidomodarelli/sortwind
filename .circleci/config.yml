@@ -4,7 +4,7 @@
 #
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
       - image: node:20.13-alpine3.20
@@ -31,11 +31,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run compile
-  test:
-    docker:
-      - image: node:20.13-alpine3.20
-    steps:
       - run: npm run test
   lint:
     docker:
@@ -46,10 +41,5 @@ jobs:
 workflows:
   all:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
+      - test
+      - lint
