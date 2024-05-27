@@ -114,7 +114,7 @@ function buildMatcher(value: LangConfig): Matcher {
 		};
 	} else if (isArrayOfStrings(value)) {
 		return {
-			regex: value.map((v) => new RegExp(v, 'gi')),
+			regex: value.map((value_) => new RegExp(value_, 'gi')),
 		};
 	} else if (value == undefined) {
 		return {
@@ -125,7 +125,7 @@ function buildMatcher(value: LangConfig): Matcher {
 		if (typeof value.regex === 'string') {
 			regex = [new RegExp(value.regex, 'gi')];
 		} else if (isArrayOfStrings(value.regex)) {
-			regex = value.regex.map((v) => new RegExp(v, 'gi'));
+			regex = value.regex.map((value_) => new RegExp(value_, 'gi'));
 		}
 
 		let separator;
@@ -155,7 +155,7 @@ export function buildMatchers(value: LangConfig | LangConfig[]): Matcher[] {
 		if (value.length === 0) {
 			return [];
 		} else if (!isArrayOfStrings(value)) {
-			return value.map((v) => buildMatcher(v));
+			return value.map((value_) => buildMatcher(value_));
 		}
 	}
 	return [buildMatcher(value)];

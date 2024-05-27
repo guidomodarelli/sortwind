@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 module.exports = {
 	root: true,
 	env: {
@@ -68,8 +69,12 @@ module.exports = {
 						checkFilenames: true,
 						extendDefaultReplacements: true,
 						extendDefaultAllowList: true,
-						replacements: {},
-						ignore: [ 'i' ],
+						replacements: {
+							v: {
+								value: true,
+							}
+						},
+						ignore: [ 'i', 'env' ],
 					},
 				],
 				'unicorn/prefer-module': "off",
