@@ -1,30 +1,30 @@
 /* eslint-disable no-unused-vars */
 
 type MatcherReplacement = {
-	replacement?: string;
+  replacement?: string;
 };
 
 type MatcherSeparator<T extends string | RegExp = RegExp> = {
-	separator?: T;
+  separator?: T;
 };
 
 type MatcherString = MatcherReplacement &
-	MatcherSeparator<string> & {
-		regex?: string | string[];
-	};
+  MatcherSeparator<string> & {
+    regex?: string | string[];
+  };
 
 export type LangConfig = string | string[] | MatcherString | undefined;
 
 export type Options = MatcherReplacement &
-	MatcherSeparator & {
-		shouldRemoveDuplicates: boolean;
-		shouldPrependCustomClasses: boolean;
-		customTailwindPrefix: string;
-	};
+  MatcherSeparator & {
+    shouldRemoveDuplicates: boolean;
+    shouldPrependCustomClasses: boolean;
+    customTailwindPrefix: string;
+  };
 
 export type Matcher = MatcherReplacement &
-	MatcherSeparator & {
-		regex: RegExp[];
-	};
+  MatcherSeparator & {
+    regex: RegExp[];
+  };
 
 export type TextMatchCallback = (text: string, startPosition: number) => void;

@@ -1,4 +1,4 @@
 export enum RustywindArgs {
-	WRITE = '--write',
-	ALLOW_DUPLICATES = '--allow-duplicates',
+  WRITE = '--write',
+  ALLOW_DUPLICATES = '--allow-duplicates',
 }
