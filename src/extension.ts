@@ -10,7 +10,7 @@ import { LANGUAGE_CONFIG } from './constants/language';
 import { RustywindArgs } from './constants/rustywind';
 
 const config = workspace.getConfiguration();
-const langConfig: { [key: string]: LangConfig | LangConfig[] } =
+const langConfig: Record<string, LangConfig | LangConfig[]> =
 	config.get(SortwindConfig.CLASS_REGEX) || {};
 
 const sortOrder = config.get(SortwindConfig.DEFAULT_SORT_ORDER);
