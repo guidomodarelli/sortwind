@@ -1,11 +1,7 @@
-import {
-	sortClassString,
-	getTextMatch,
-	buildMatchers,
-} from '../src/utils';
+import { sortClassString, getTextMatch, buildMatchers } from '../src/utils';
 import { LangConfig, Matcher } from '../src/types';
 import * as _ from 'lodash';
-import { describe, expect, it, vitest } from "vitest";
+import { describe, expect, it, vitest } from 'vitest';
 import pjson from '../package.json';
 
 const sortOrder: string[] =
@@ -298,20 +294,23 @@ describe('extract className (jsx) string with single regex', () => {
 			`export function FormGroup({className = '', ...props}) {
 			  return <div className={\``.length,
 		],
-	])('%s', (_testName, editorText, expectedTextMatch, expectedStartPosition) => {
-		const stringRegex =
-			'(?:\\bclass(?:Name)?\\s*=[\\w\\d\\s_,{}()[\\]]*["\'`]([\\w\\d\\s_\\-:/${}]+)["\'`][\\w\\d\\s_,{}()[\\]]*)|(?:\\btw\\s*`([\\w\\d\\s_\\-:/]*)`)';
-		const callback = vitest.fn();
+	])(
+		'%s',
+		(_testName, editorText, expectedTextMatch, expectedStartPosition) => {
+			const stringRegex =
+				'(?:\\bclass(?:Name)?\\s*=[\\w\\d\\s_,{}()[\\]]*["\'`]([\\w\\d\\s_\\-:/${}]+)["\'`][\\w\\d\\s_,{}()[\\]]*)|(?:\\btw\\s*`([\\w\\d\\s_\\-:/]*)`)';
+			const callback = vitest.fn();
 
-		for (const matcher of buildMatchers(stringRegex)) {
-			getTextMatch(matcher.regex, editorText.toString(), callback);
+			for (const matcher of buildMatchers(stringRegex)) {
+				getTextMatch(matcher.regex, editorText.toString(), callback);
+			}
+
+			expect(callback).toHaveBeenCalledWith(
+				expectedTextMatch,
+				expectedStartPosition
+			);
 		}
-
-		expect(callback).toHaveBeenCalledWith(
-			expectedTextMatch,
-			expectedStartPosition
-		);
-	});
+	);
 });
 
 describe('extract className (jsx) string(s) with multiple regexes', () => {
@@ -440,20 +439,23 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 			`export function FormGroup({className = '', ...props}) {
 			  return <div className={\``.length,
 		],
-	])('%s', (_testName, editorText, expectedTextMatch, expectedStartPosition) => {
-		for (const jsxLanguage of jsxLanguages) {
-			const callback = vitest.fn();
+	])(
+		'%s',
+		(_testName, editorText, expectedTextMatch, expectedStartPosition) => {
+			for (const jsxLanguage of jsxLanguages) {
+				const callback = vitest.fn();
 
-			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
-				getTextMatch(matcher.regex, editorText.toString(), callback);
+				for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
+					getTextMatch(matcher.regex, editorText.toString(), callback);
+				}
+
+				expect(callback).toHaveBeenCalledWith(
+					expectedTextMatch,
+					expectedStartPosition
+				);
 			}
-
-			expect(callback).toHaveBeenCalledWith(
-				expectedTextMatch,
-				expectedStartPosition
-			);
 		}
-	});
+	);
 
 	it('should do nothing if no regexes (empty array) are provided', () => {
 		const callback = vitest.fn();

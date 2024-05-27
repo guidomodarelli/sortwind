@@ -4,10 +4,10 @@ import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
 import { sortClassString, getTextMatch, buildMatchers } from './utils';
 import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
-import { LangConfig, Options } from "./types";
-import { SortwindConfig } from "./constants/sortwind";
-import { LANGUAGE_CONFIG } from "./constants/language";
-import { RustywindArgs } from "./constants/rustywind";
+import { LangConfig, Matcher, Options } from './types';
+import { SortwindConfig } from './constants/sortwind';
+import { LANGUAGE_CONFIG } from './constants/language';
+import { RustywindArgs } from './constants/rustywind';
 
 const config = workspace.getConfiguration();
 const langConfig: { [key: string]: LangConfig | LangConfig[] } =
@@ -15,13 +15,17 @@ const langConfig: { [key: string]: LangConfig | LangConfig[] } =
 
 const sortOrder = config.get(SortwindConfig.DEFAULT_SORT_ORDER);
 
-const customTailwindPrefixConfig = config.get(SortwindConfig.CUSTOM_TAILWIND_PREFIX);
+const customTailwindPrefixConfig = config.get(
+	SortwindConfig.CUSTOM_TAILWIND_PREFIX
+);
 const customTailwindPrefix =
 	typeof customTailwindPrefixConfig === 'string'
 		? customTailwindPrefixConfig
 		: '';
 
-const shouldRemoveDuplicatesConfig = config.get(SortwindConfig.REMOVE_DUPLICATES);
+const shouldRemoveDuplicatesConfig = config.get(
+	SortwindConfig.REMOVE_DUPLICATES
+);
 const shouldRemoveDuplicates =
 	typeof shouldRemoveDuplicatesConfig === 'boolean'
 		? shouldRemoveDuplicatesConfig
@@ -42,7 +46,7 @@ export function activate(context: ExtensionContext) {
 			const editorText = editor.document.getText();
 			const editorLangId = editor.document.languageId;
 
-			const matchers = buildMatchers(
+			const matchers: Matcher[] = buildMatchers(
 				langConfig[editorLangId] || langConfig[LANGUAGE_CONFIG.HTML]
 			);
 

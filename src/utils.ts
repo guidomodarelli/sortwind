@@ -65,11 +65,14 @@ function sortClassArray(
 
 	// prepend the classes that were not in the sort order if configured this way
 	const customClassesToPrepend = classArray.filter(
-		(element) =>
-			!shouldPrependCustomClasses && !sortOrder.includes(element)
+		(element) => !shouldPrependCustomClasses && !sortOrder.includes(element)
 	);
 
-	result.push(...customClassesToAppend, ...sortedClassesInOrder, ...customClassesToPrepend);
+	result.push(
+		...customClassesToAppend,
+		...sortedClassesInOrder,
+		...customClassesToPrepend
+	);
 
 	return result;
 }
@@ -181,23 +184,23 @@ export function getTextMatch(
 	callback: TextMatchCallback,
 	startPosition: number = 0
 ): void {
-	if (regexes.length > 0) {
-		let wrapper: RegExpExecArray | null;
-		while ((wrapper = regexes[0].exec(text)) !== null) {
-			const wrapperMatch = wrapper[0];
-			const valueMatchIndex = wrapper.findIndex(
-				(match, index) => index !== 0 && match
-			);
-			const valueMatch = wrapper[valueMatchIndex];
+	if (regexes.length <= 0) return;
 
-			const newStartPosition =
-				startPosition + wrapper.index + wrapperMatch.lastIndexOf(valueMatch);
+	let wrapper: RegExpExecArray | null;
+	while ((wrapper = regexes[0].exec(text)) !== null) {
+		const wrapperMatch = wrapper[0];
+		const valueMatchIndex = wrapper.findIndex(
+			(match, index) => index !== 0 && match
+		);
+		const valueMatch = wrapper[valueMatchIndex];
 
-			if (regexes.length === 1) {
-				callback(valueMatch, newStartPosition);
-			} else {
-				getTextMatch(regexes.slice(1), valueMatch, callback, newStartPosition);
-			}
+		const newStartPosition =
+			startPosition + wrapper.index + wrapperMatch.lastIndexOf(valueMatch);
+
+		if (regexes.length === 1) {
+			callback(valueMatch, newStartPosition);
+		} else {
+			getTextMatch(regexes.slice(1), valueMatch, callback, newStartPosition);
 		}
 	}
 }
