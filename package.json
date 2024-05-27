@@ -2,6 +2,7 @@
   "name": "sortwind",
   "displayName": "Sortwind",
   "version": "2.0.0",
+  "packageManager": "yarn@4.2.2",
   "description": "An opinionated class sorter for Tailwind CSS",
   "author": "Ryan Heybourn <ryan@heybourn.com>",
   "publisher": "heybourn",

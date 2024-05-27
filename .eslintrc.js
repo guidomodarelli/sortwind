@@ -89,6 +89,7 @@ module.exports = {
 					'name',
 					'displayName',
 					'version',
+					'packageManager',
 					'description',
 					'author',
 					'publisher',
