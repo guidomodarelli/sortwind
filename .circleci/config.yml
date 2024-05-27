@@ -31,4 +31,25 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: npm run compile
+  test:
+    docker:
+      - image: cimg/node:17.2
+    steps:
       - run: npm run test
+  lint:
+    docker:
+      - image: cimg/node:17.2
+    steps:
+      - run: npm run lint
+
+workflows:
+  all:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - lint:
+          requires:
+            - build
