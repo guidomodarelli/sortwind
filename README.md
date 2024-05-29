@@ -35,9 +35,7 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 	* 2.4. [`sortwind.prependCustomClasses`](#sortwind.prependCustomClasses)
 	* 2.5. [`sortwind.runOnSave`](#sortwind.runOnSave)
 * 3. [Contributing](#Contributing)
-* 4. [Contributors](#Contributors)
-	* 4.1. [Financial Contributors](#FinancialContributors)
-		* 4.1.1. [Organizations](#Organizations)
+* 4. [License](#License)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -51,9 +49,9 @@ You can install Sortwind via the VS Code Marketplace, or package it yourself usi
 
 You can also trigger Sortwind by:
 
-* Pressing ALT + Shift + T on Mac
-* Pressing CTRL + ALT + T on Windows
-* Pressing CTRL + ALT + T on Linux
+* Pressing <kbd>ALT</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd> on Mac
+* Pressing <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>T</kbd> on Windows
+* Pressing <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>T</kbd> on Linux
 
 Sortwind can sort individual files by running 'Sort Tailwind CSS Classes' via the Command Palette. Workspaces can also be sorted by running 'Sort Tailwind CSS Classes on Entire Workspace'.
 
@@ -98,7 +96,7 @@ The first regex will look for JSX `class` or `className` attributes or [twin.mac
 
 The second regex will then look for class names to be sorted within these matches.
 
-#### 2.1.2. <a name='ConfigurationObject'></a>Configuration Object
+####  2.1.2. <a name='ConfigurationObject'></a>Configuration Object
 
 Optionally a configuration object can be passed to specify additional options for sorting class names.
 
@@ -187,9 +185,9 @@ Sortwind will run on save by default (if a `tailwind.config.js` file is present 
 Sortwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 <!--
-##  4. <a name='Contributors'></a>Contributors
+<!--##  4. <a name='Contributorss'></a>Contributorss
 
-###  4.1. <a name='FinancialContributors'></a>Financial Contributors
+<!--###  4.1. <a name='FinancialContributorss'></a>Financial Contributorss
 
 Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/headwind/contribute)] -->
 
@@ -197,7 +195,7 @@ Become a financial contributor and help us sustain our community. [[Contribute](
 
 <a href="https://opencollective.com/headwind"><img src="https://opencollective.com/headwind/individuals.svg?width=890"></a>
 
-####  4.1.1. <a name='Organizations'></a>Organizations
+<!--####  4.1.1. <a name='Organizationss'></a>Organizationss
 
 Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/headwind/contribute)]
 
@@ -205,7 +203,7 @@ Support this project with your organization. Your logo will show up here with a 
 <a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a>
 -->
 
-## License
+##  4. <a name='License'></a>License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_large)
 
 > [!IMPORTANT]
