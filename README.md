@@ -35,7 +35,8 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 	* 2.4. [`sortwind.prependCustomClasses`](#sortwind.prependCustomClasses)
 	* 2.5. [`sortwind.runOnSave`](#sortwind.runOnSave)
 * 3. [Contributing](#Contributing)
-* 4. [License](#License)
+* 4. [Analytics](#Analytics)
+* 5. [License](#License)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -203,7 +204,11 @@ Support this project with your organization. Your logo will show up here with a 
 <a href="https://opencollective.com/headwind/organization/1/website"><img src="https://opencollective.com/headwind/organization/1/avatar.svg"></a>
 -->
 
-##  4. <a name='License'></a>License
+##  4. <a name='Analytics'></a>Analytics
+
+![Alt](https://repobeats.axiom.co/api/embed/ed233e2b29c833738d8347ebc962a65921eaa091.svg "Repobeats analytics image")
+
+##  5. <a name='License'></a>License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguidomodarelli%2Fsortwind?ref=badge_large)
 
 > [!IMPORTANT]
