@@ -25,7 +25,7 @@ Sortwind is an opinionated Tailwind CSS class sorter for Visual Studio Code. It 
 
 <!-- vscode-markdown-toc -->
 * 1. [Usage](#Usage)
-* 2. [Customisation](#Customisation)
+* 2. [Customization](#Customization)
 	* 2.1. [`sortwind.classRegex`](#sortwind.classRegex)
 		* 2.1.1. [Multi-step Regex](#Multi-stepRegex)
 		* 2.1.2. [Configuration Object](#ConfigurationObject)
@@ -58,7 +58,7 @@ Sortwind can sort individual files by running 'Sort Tailwind CSS Classes' via th
 
 Any breakpoints or unknown classes will be moved to the end of the class list, whilst duplicate classes will be removed.
 
-##  2. <a name='Customisation'></a>Customisation
+##  2. <a name='Customization'></a>Customization
 
 Sortwind ships with a default class order (located in [package.json](package.json)). You can edit this (and other settings) to your liking on the extension settings page.
 
@@ -67,7 +67,7 @@ Sortwind ships with a default class order (located in [package.json](package.jso
 An object with language IDs as keys and their values determining the regex to search for Tailwind CSS classes.
 The default is located in [package.json](package.json) but this can be customized to suit your needs.
 
-There can be multiple capturing groups, that should only contain a string with Tailwind CSS classes (without any apostrophies etc.). If a new group, which doesn't contain the `class` string, is created, ensure that it is non-capturing by using `(?:)`.
+There can be multiple capturing groups, that should only contain a string with Tailwind CSS classes (without any apostrophes etc.). If a new group, which doesn't contain the `class` string, is created, ensure that it is non-capturing by using `(?:)`.
 
 Example from `package.json`:
 
@@ -80,7 +80,7 @@ Example from `package.json`:
 
 ####  2.1.1. <a name='Multi-stepRegex'></a>Multi-step Regex
 
-A multi-step regex can be specified by using an array of regexes to be executed in order.
+A multi-step regex can be specified by using an array of regexes that are executed sequentially.
 
 Example from `package.json`:
 
@@ -155,7 +155,7 @@ The result of `valueMatch` should be the class text _exactly_, with no other cha
 
 Good example value: `valueMatch w-64 h-full bg-blue-400 relative`
 
-**Note**: Changes made to Sortwind's JSON configuration options may not take effect immediately. When experimenting with custom `classRegex`, after each change you should open the control pallete (Ctrl/Cmd + Shift + P) and run `Developer: Reload Window` to ensure changes are applied.
+**Note**: Changes made to Sortwind's JSON configuration options may not take effect immediately. When experimenting with custom `classRegex`, after each change you should open the control palette (Ctrl/Cmd + Shift + P) and run `Developer: Reload Window` to ensure changes are applied.
 
 <hr>
 
@@ -186,9 +186,9 @@ Sortwind will run on save by default (if a `tailwind.config.js` file is present 
 Sortwind is open-source and contributions are always welcome. If you're interested in submitting a pull request, please take a moment to review [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 <!--
-<!--##  4. <a name='Contributorss'></a>Contributorss
+<!--##  4. <a name='Contributors'></a>Contributors
 
-<!--###  4.1. <a name='FinancialContributorss'></a>Financial Contributorss
+<!--###  4.1. <a name='FinancialContributors'></a>Financial Contributors
 
 Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/headwind/contribute)] -->
 
@@ -196,7 +196,7 @@ Become a financial contributor and help us sustain our community. [[Contribute](
 
 <a href="https://opencollective.com/headwind"><img src="https://opencollective.com/headwind/individuals.svg?width=890"></a>
 
-<!--####  4.1.1. <a name='Organizationss'></a>Organizationss
+<!--####  4.1.1. <a name='Organizations'></a>Organizations
 
 Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/headwind/contribute)]
 
