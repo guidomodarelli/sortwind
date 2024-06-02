@@ -148,7 +148,9 @@ function buildMatcher(value: LangConfigValue): Matcher {
  * build matchers from.
  * @returns An array of Matcher objects is being returned.
  */
-export function buildMatchers(value: LangConfigValue | LangConfigValue[]): Matcher[] {
+export function buildMatchers(
+  value: LangConfigValue | LangConfigValue[],
+): Matcher[] {
   if (value == undefined) {
     return [];
   } else if (Array.isArray(value)) {
