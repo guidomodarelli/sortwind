@@ -13,7 +13,7 @@ type MatcherString = MatcherReplacement &
     regex?: string | string[];
   };
 
-export type LangConfig = string | string[] | MatcherString | undefined;
+export type LangConfigValue = string | string[] | MatcherString | undefined;
 
 export type Options = MatcherReplacement &
   MatcherSeparator & {

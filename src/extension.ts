@@ -4,40 +4,47 @@ import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
 import { sortClassString, getTextMatch, buildMatchers } from './utils';
 import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
-import { LangConfig, Matcher, Options } from './types';
+import { LangConfigValue, Matcher, Options } from './types';
 import { SortwindConfig } from './constants/sortwind';
 import { LANGUAGE_CONFIG } from './constants/language';
 import { RustywindArgs } from './constants/rustywind';
 
 const config = workspace.getConfiguration();
-const langConfig: Record<string, LangConfig | LangConfig[]> =
-  config.get(SortwindConfig.CLASS_REGEX) || {};
 
-const sortOrder = config.get(SortwindConfig.DEFAULT_SORT_ORDER);
+const sortwindConfig = {
+  langConfig: (config.get(SortwindConfig.CLASS_REGEX) || {}) as Record<
+    string,
+    LangConfigValue | LangConfigValue[]
+  >,
+  sortOrder: config.get(SortwindConfig.DEFAULT_SORT_ORDER),
+  customTailwindPrefix: config.get(SortwindConfig.CUSTOM_TAILWIND_PREFIX),
+  shouldRemoveDuplicates: config.get(SortwindConfig.REMOVE_DUPLICATES),
+  shouldPrependCustomClasses: config.get(SortwindConfig.PREPEND_CUSTOM_CLASSES),
+  runOnSave: config.get(SortwindConfig.RUN_ON_SAVE),
+} as const;
 
-const customTailwindPrefixConfig = config.get(
-  SortwindConfig.CUSTOM_TAILWIND_PREFIX,
-);
-const customTailwindPrefix =
-  typeof customTailwindPrefixConfig === 'string'
-    ? customTailwindPrefixConfig
-    : '';
+type SortwindConfigKeys = keyof typeof sortwindConfig;
 
-const shouldRemoveDuplicatesConfig = config.get(
-  SortwindConfig.REMOVE_DUPLICATES,
-);
-const shouldRemoveDuplicates =
-  typeof shouldRemoveDuplicatesConfig === 'boolean'
-    ? shouldRemoveDuplicatesConfig
-    : true;
+const sortwindConfigValues = {
+  sortOrder: Array.isArray(sortwindConfig.sortOrder)
+    ? sortwindConfig.sortOrder
+    : [],
 
-const shouldPrependCustomClassesConfig = config.get(
-  SortwindConfig.PREPEND_CUSTOM_CLASSES,
-);
-const shouldPrependCustomClasses =
-  typeof shouldPrependCustomClassesConfig === 'boolean'
-    ? shouldPrependCustomClassesConfig
-    : false;
+  customTailwindPrefix:
+    typeof sortwindConfig.customTailwindPrefix === 'string'
+      ? sortwindConfig.customTailwindPrefix
+      : '',
+
+  shouldRemoveDuplicates:
+    typeof sortwindConfig.shouldRemoveDuplicates === 'boolean'
+      ? sortwindConfig.shouldRemoveDuplicates
+      : true,
+
+  shouldPrependCustomClasses:
+    typeof sortwindConfig.shouldPrependCustomClasses === 'boolean'
+      ? sortwindConfig.shouldPrependCustomClasses
+      : false,
+} satisfies Partial<Record<SortwindConfigKeys, unknown>>;
 
 export function activate(context: ExtensionContext) {
   const disposable = commands.registerTextEditorCommand(
@@ -47,7 +54,8 @@ export function activate(context: ExtensionContext) {
       const editorLangId = editor.document.languageId;
 
       const matchers: Matcher[] = buildMatchers(
-        langConfig[editorLangId] || langConfig[LANGUAGE_CONFIG.HTML],
+        sortwindConfig.langConfig[editorLangId] ||
+          sortwindConfig.langConfig[LANGUAGE_CONFIG.HTML],
       );
 
       for (const matcher of matchers) {
@@ -59,20 +67,17 @@ export function activate(context: ExtensionContext) {
           );
 
           const options: Options = {
-            shouldRemoveDuplicates,
-            shouldPrependCustomClasses,
-            customTailwindPrefix,
+            shouldRemoveDuplicates: sortwindConfigValues.shouldRemoveDuplicates,
+            shouldPrependCustomClasses:
+              sortwindConfigValues.shouldPrependCustomClasses,
+            customTailwindPrefix: sortwindConfigValues.customTailwindPrefix,
             separator: matcher.separator,
             replacement: matcher.replacement,
           };
 
           edit.replace(
             range,
-            sortClassString(
-              text,
-              Array.isArray(sortOrder) ? sortOrder : [],
-              options,
-            ),
+            sortClassString(text, sortwindConfigValues.sortOrder, options),
           );
         });
       }
@@ -91,7 +96,9 @@ export function activate(context: ExtensionContext) {
         const rustyWindArgs = [
           workspaceFolder[0].uri.fsPath,
           RustywindArgs.WRITE,
-          shouldRemoveDuplicates ? '' : RustywindArgs.ALLOW_DUPLICATES,
+          sortwindConfigValues.shouldRemoveDuplicates
+            ? ''
+            : RustywindArgs.ALLOW_DUPLICATES,
         ].filter((argument) => argument !== '');
 
         const rustyWindProc = spawn(rustyWindPath, rustyWindArgs);
@@ -116,7 +123,7 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(runOnProject, disposable);
 
   // if runOnSave is enabled organize tailwind classes before saving
-  if (config.get(SortwindConfig.RUN_ON_SAVE)) {
+  if (sortwindConfig.runOnSave) {
     context.subscriptions.push(
       workspace.onWillSaveTextDocument((_textDocumentWillSaveEvent) => {
         commands.executeCommand(SortwindConfig.SORT_TAILWIND_CLASSES);

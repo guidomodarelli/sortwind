@@ -1,4 +1,4 @@
-import { LangConfig, Matcher, Options, TextMatchCallback } from './types';
+import { LangConfigValue, Matcher, Options, TextMatchCallback } from './types';
 
 /**
  * Sorts a string of CSS classes according to a predefined order.
@@ -104,10 +104,10 @@ function isArrayOfStrings(value: unknown): value is string[] {
 /**
  * The function `buildMatcher` takes a `LangConfig` value and returns a `Matcher`
  * object based on the type and properties of the input value.
- * @param {LangConfig} value - The input configuration to build a matcher from.
+ * @param {LangConfigValue} value - The input configuration to build a matcher from.
  * @returns The function `buildMatcher` returns an object `Matcher`.
  */
-function buildMatcher(value: LangConfig): Matcher {
+function buildMatcher(value: LangConfigValue): Matcher {
   if (typeof value === 'string') {
     return {
       regex: [new RegExp(value, 'gi')],
@@ -144,11 +144,11 @@ function buildMatcher(value: LangConfig): Matcher {
 /**
  * The function `buildMatchers` takes a value or an array of values, checks their
  * type, and returns an array of Matcher objects.
- * @param {LangConfig | LangConfig[]} value - The input configuration(s) to
+ * @param {LangConfigValue | LangConfigValue[]} value - The input configuration(s) to
  * build matchers from.
  * @returns An array of Matcher objects is being returned.
  */
-export function buildMatchers(value: LangConfig | LangConfig[]): Matcher[] {
+export function buildMatchers(value: LangConfigValue | LangConfigValue[]): Matcher[] {
   if (value == undefined) {
     return [];
   } else if (Array.isArray(value)) {
