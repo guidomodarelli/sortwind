@@ -1,7 +1,19 @@
 'use strict';
 
-import { commands, workspace, ExtensionContext, Range, window } from 'vscode';
-import { sortClassString, getTextMatch, buildMatchers } from './utils';
+import {
+  commands,
+  workspace,
+  ExtensionContext,
+  Range,
+  window,
+  TextEditor,
+  TextEditorEdit,
+} from 'vscode';
+import {
+  sortClassString,
+  processNestedRegexMatches,
+  buildMatchers,
+} from './utils';
 import { spawn } from 'node:child_process';
 import { rustyWindPath } from 'rustywind';
 import { LangConfigValue, Matcher, Options } from './types';
@@ -46,41 +58,69 @@ const sortwindConfigValues = {
       : false,
 } satisfies Partial<Record<SortwindConfigKeys, unknown>>;
 
+function getRange(editor: TextEditor, startPosition: number, text: string) {
+  const endPosition = startPosition + text.length;
+  const range = new Range(
+    editor.document.positionAt(startPosition),
+    editor.document.positionAt(endPosition),
+  );
+
+  return range;
+}
+
+function getOptions(matcher: Matcher): Options {
+  return {
+    shouldRemoveDuplicates: sortwindConfigValues.shouldRemoveDuplicates,
+    shouldPrependCustomClasses: sortwindConfigValues.shouldPrependCustomClasses,
+    customTailwindPrefix: sortwindConfigValues.customTailwindPrefix,
+    separator: matcher.separator,
+    replacement: matcher.replacement,
+  };
+}
+
+function replaceAndSortTextInEditor(
+  matchers: Matcher[],
+  editor: TextEditor,
+  edit: TextEditorEdit,
+) {
+  const editorText = editor.document.getText();
+
+  for (const matcher of matchers) {
+    processNestedRegexMatches(
+      matcher.regex,
+      editorText,
+      (text, startPosition) => {
+        const range = getRange(editor, startPosition, text);
+        const sortedStringCssClasses = sortClassString(
+          text,
+          sortwindConfigValues.sortOrder,
+          getOptions(matcher),
+        );
+
+        edit.replace(range, sortedStringCssClasses);
+      },
+    );
+  }
+}
+
+function resolveLangConfig(editorLangId: string) {
+  return (
+    sortwindConfig.langConfig[editorLangId] ||
+    sortwindConfig.langConfig[LANGUAGE_CONFIG.HTML]
+  );
+}
+
 export function activate(context: ExtensionContext) {
   const disposable = commands.registerTextEditorCommand(
     SortwindConfig.SORT_TAILWIND_CLASSES,
     function (editor, edit) {
-      const editorText = editor.document.getText();
       const editorLangId = editor.document.languageId;
 
       const matchers: Matcher[] = buildMatchers(
-        sortwindConfig.langConfig[editorLangId] ||
-          sortwindConfig.langConfig[LANGUAGE_CONFIG.HTML],
+        resolveLangConfig(editorLangId),
       );
 
-      for (const matcher of matchers) {
-        getTextMatch(matcher.regex, editorText, (text, startPosition) => {
-          const endPosition = startPosition + text.length;
-          const range = new Range(
-            editor.document.positionAt(startPosition),
-            editor.document.positionAt(endPosition),
-          );
-
-          const options: Options = {
-            shouldRemoveDuplicates: sortwindConfigValues.shouldRemoveDuplicates,
-            shouldPrependCustomClasses:
-              sortwindConfigValues.shouldPrependCustomClasses,
-            customTailwindPrefix: sortwindConfigValues.customTailwindPrefix,
-            separator: matcher.separator,
-            replacement: matcher.replacement,
-          };
-
-          edit.replace(
-            range,
-            sortClassString(text, sortwindConfigValues.sortOrder, options),
-          );
-        });
-      }
+      replaceAndSortTextInEditor(matchers, editor, edit);
     },
   );
 

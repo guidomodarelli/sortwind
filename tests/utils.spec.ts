@@ -1,11 +1,11 @@
-import { sortClassString, getTextMatch, buildMatchers } from '../src/utils';
-import { LangConfig, Matcher } from '../src/types';
+import { sortClassString, processNestedRegexMatches, buildMatchers } from '../src/utils';
+import { LangConfigValue, Matcher } from '../src/types';
 import * as _ from 'lodash';
 import { describe, expect, it, vitest } from 'vitest';
-import pjson from '../package.json';
+import package_json from '../package.json';
 
 const sortOrder: string[] =
-	pjson.contributes.configuration[0].properties['sortwind.defaultSortOrder']
+	package_json.contributes.configuration[0].properties['sortwind.defaultSortOrder']
 		.default;
 const customClass: string = 'yoda';
 
@@ -302,7 +302,7 @@ describe('extract className (jsx) string with single regex', () => {
 			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(stringRegex)) {
-				getTextMatch(matcher.regex, editorText.toString(), callback);
+				processNestedRegexMatches(matcher.regex, editorText.toString(), callback);
 			}
 
 			expect(callback).toHaveBeenCalledWith(
@@ -315,7 +315,7 @@ describe('extract className (jsx) string with single regex', () => {
 
 describe('extract className (jsx) string(s) with multiple regexes', () => {
 	const configRegex =
-		pjson.contributes.configuration[0].properties['sortwind.classRegex']
+		package_json.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
 		'javascript',
@@ -446,7 +446,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 				const callback = vitest.fn();
 
 				for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
-					getTextMatch(matcher.regex, editorText.toString(), callback);
+					processNestedRegexMatches(matcher.regex, editorText.toString(), callback);
 				}
 
 				expect(callback).toHaveBeenCalledWith(
@@ -459,7 +459,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 
 	it('should do nothing if no regexes (empty array) are provided', () => {
 		const callback = vitest.fn();
-		getTextMatch([], 'test', callback);
+		processNestedRegexMatches([], 'test', callback);
 		expect(callback).toHaveBeenCalledTimes(0);
 	});
 
@@ -607,7 +607,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
-				getTextMatch(matcher.regex, editorText.toString(), callback);
+				processNestedRegexMatches(matcher.regex, editorText.toString(), callback);
 			}
 
 			expect(callback).toHaveBeenCalledTimes(expectedResults.length);
@@ -628,7 +628,7 @@ describe('extract className (jsx) string(s) with multiple regexes', () => {
 
 describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', () => {
 	const configRegex =
-		pjson.contributes.configuration[0].properties['sortwind.classRegex']
+		package_json.contributes.configuration[0].properties['sortwind.classRegex']
 			.default;
 	const jsxLanguages = [
 		'javascript',
@@ -679,7 +679,7 @@ describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', (
 			const callback = vitest.fn();
 
 			for (const matcher of buildMatchers(configRegex[jsxLanguage])) {
-				getTextMatch(matcher.regex, editorText.toString(), callback);
+				processNestedRegexMatches(matcher.regex, editorText.toString(), callback);
 			}
 
 			expect(callback).toHaveBeenCalledTimes(expectedResults.length);
@@ -699,7 +699,7 @@ describe('twin macro - extract tw prop (jsx) string(s) with multiple regexes', (
 });
 
 describe('buildMatchers', () => {
-	it.each<[string, LangConfig | LangConfig[], Matcher[]]>([
+	it.each<[string, LangConfigValue | LangConfigValue[], Matcher[]]>([
 		['undefined', undefined, []],
 		['empty', [], []],
 		[

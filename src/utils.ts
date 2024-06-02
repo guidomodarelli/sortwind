@@ -164,10 +164,10 @@ export function buildMatchers(
 }
 
 /**
- * The function `getTextMatch` takes an array of regular expressions, a text
- * string, a callback function, and an optional starting position, and
- * recursively matches the regular expressions in the text string, calling the
- * callback function with the matched text and its position.
+ * Takes an array of regular expressions, a text string, a callback function,
+ * and an optional starting position, and recursively matches the regular
+ * expressions in the text string, calling the callback function with the
+ * matched text and its position.
  * @param {RegExp[]} regexes - it will be used to search for matches in the
  * `text` parameter.
  * @param {string} text - which you want to search for matches based on the
@@ -180,7 +180,7 @@ export function buildMatchers(
  * is set to 0 if no value is provided when calling the function. This parameter
  * allows you to specify an initial position
  */
-export function getTextMatch(
+export function processNestedRegexMatches(
   regexes: RegExp[],
   text: string,
   callback: TextMatchCallback,
@@ -202,7 +202,12 @@ export function getTextMatch(
     if (regexes.length === 1) {
       callback(valueMatch, newStartPosition);
     } else {
-      getTextMatch(regexes.slice(1), valueMatch, callback, newStartPosition);
+      processNestedRegexMatches(
+        regexes.slice(1),
+        valueMatch,
+        callback,
+        newStartPosition,
+      );
     }
   }
 }
