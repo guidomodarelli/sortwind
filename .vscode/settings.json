@@ -1,4 +1,10 @@
 {
 	"editor.insertSpaces": false,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"cSpell.words": [
+		"Heybourn",
+		"regexes",
+		"Rustywind",
+		"Sortwind"
+	],
 }
